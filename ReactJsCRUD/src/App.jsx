@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {db} from "./FirebaseConfig.js";
-import { collection, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, updateDoc, doc } from "firebase/firestore";
 import "./style.scss"
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [users, setUsers] = useState([]);
   const [edt, setEdt] = useState(false)
+  const [edtUserId, setEdtUserId] = useState("")
 
   //referencia users no banco//
   const usersCollectionRef = collection(db, "users");
@@ -17,10 +18,20 @@ function App() {
     await addDoc(usersCollectionRef, {name: name, email: email});
   }
 
+  const updateUser = async () => {
+    const UserDoc = doc(db, "users", edtUserId);
+    const update = {name: name, email: email}
+    console.log(edtUserId, name)
+
+    await updateDoc(UserDoc, update);
+  }
+
   //edit mode//
-  const updateMode = async (id, name, email) => {
+  const updateMode = (id, name, email) => {
     document.getElementById("Iname").value = name;
     document.getElementById("Iemail").value = email;
+
+    setEdtUserId(id)
 
     setEdt(true);
   }
@@ -45,7 +56,7 @@ function App() {
 
         {edt 
         ?<div style={{display:'flex' ,gap:'10px'}}>
-          <button onClick={creatUser}>Editar</button>
+          <button onClick={updateUser}>Editar</button>
           <button onClick={(event) => {setEdt(false)}}>Cancelar</button>
         </div>
         :<button onClick={creatUser}>Cadastrar</button>
