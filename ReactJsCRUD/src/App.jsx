@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {db} from "./FirebaseConfig.js";
-import { collection, getDocs, addDoc, updateDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import "./style.scss"
 
 function App() {
@@ -16,32 +16,55 @@ function App() {
   //add user//
   const creatUser = async () => {
     await addDoc(usersCollectionRef, {name: name, email: email});
+
+    cleamInput();
+    getUsesr();
   }
 
+  //edit user//
   const updateUser = async () => {
     const UserDoc = doc(db, "users", edtUserId);
     const update = {name: name, email: email}
-    console.log(edtUserId, name)
-
     await updateDoc(UserDoc, update);
+
+    cleamInput();
+    setEdt(false)
+    getUsesr();
   }
 
-  //edit mode//
+  //delete user//
+  const deleteUser = async (id) => {
+    const UserDoc = doc(db, "users", id);
+    await deleteDoc(UserDoc);
+
+    getUsesr()
+  }
+
+  //edit mode on//
   const updateMode = (id, name, email) => {
     document.getElementById("Iname").value = name;
     document.getElementById("Iemail").value = email;
+
+    setName(document.getElementById("Iname").value);
+    setEmail( document.getElementById("Iemail").value);
 
     setEdtUserId(id)
 
     setEdt(true);
   }
 
-  useEffect(() => {
-    const getUsesr = async() => {
-      const data = await getDocs(usersCollectionRef);
-      setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-    }
+  const cleamInput = () => {
+    document.getElementById("Iname").value = "";
+    document.getElementById("Iemail").value = "";
+  }
 
+  //atualiza lista//
+  const getUsesr = async() => {
+    const data = await getDocs(usersCollectionRef);
+    setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+  }
+
+  useEffect(() => {
     getUsesr();
   },[])
 
@@ -57,7 +80,7 @@ function App() {
         {edt 
         ?<div style={{display:'flex' ,gap:'10px'}}>
           <button onClick={updateUser}>Editar</button>
-          <button onClick={(event) => {setEdt(false)}}>Cancelar</button>
+          <button onClick={(event) => {setEdt(false); cleamInput()}}>Cancelar</button>
         </div>
         :<button onClick={creatUser}>Cadastrar</button>
         } 
@@ -74,7 +97,7 @@ function App() {
               </div>
               <div className="btns">
                 <button onClick={(event) => {updateMode(user.id, user.name, user.email)}}>Editar</button>
-                <button>Excuir</button>
+                <button onClick={() => {deleteUser(user.id)}}>Excuir</button>
               </div>
             </div>
             

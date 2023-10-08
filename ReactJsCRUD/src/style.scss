@@ -17,6 +17,10 @@
     flex-direction: column;
     gap: 5%;
 
+    ::-webkit-scrollbar {
+        display: none;
+      }
+
     .creat{
         display: flex;
         justify-content: center;
@@ -51,7 +55,7 @@
         height: 60%;
         border-radius: 30px;
         padding: 15px 0px 15px 0px;
-        overflow: hidden;
+        overflow: scroll;
 
         .row {
             background-color: rgb(226, 224, 222);
@@ -59,7 +63,7 @@
             align-items: center;
             flex-direction: row;
             width: 98%;
-            height: 50px;
+            min-height: 50px;
             margin-top: 10px;
             border-radius: 10px;
 
