@@ -15,21 +15,31 @@ function App() {
 
   //add user//
   const creatUser = async () => {
-    await addDoc(usersCollectionRef, {name: name, email: email});
+    if (document.getElementById("Iname").value && document.getElementById("Iemail").value){
+      await addDoc(usersCollectionRef, {name: name, email: email});
+      cleamInput();
+      getUsesr();
 
-    cleamInput();
-    getUsesr();
+    }else{
+     alert("Preencha todos os campos!") 
+    }
   }
 
   //edit user//
   const updateUser = async () => {
-    const UserDoc = doc(db, "users", edtUserId);
-    const update = {name: name, email: email}
-    await updateDoc(UserDoc, update);
+    if (document.getElementById("Iname").value && document.getElementById("Iemail").value){
+      const UserDoc = doc(db, "users", edtUserId);
+      const update = {name: name, email: email}
+      await updateDoc(UserDoc, update);
 
-    cleamInput();
-    setEdt(false)
-    getUsesr();
+      cleamInput();
+      setEdt(false)
+      getUsesr(); 
+
+    }else{
+     alert("Preencha todos os campos!") 
+    }
+
   }
 
   //delete user//
@@ -48,14 +58,17 @@ function App() {
     setName(document.getElementById("Iname").value);
     setEmail( document.getElementById("Iemail").value);
 
-    setEdtUserId(id)
-
+    setEdtUserId(id);
     setEdt(true);
   }
 
+  //cleam inputs//
   const cleamInput = () => {
     document.getElementById("Iname").value = "";
     document.getElementById("Iemail").value = "";
+
+    setName("");
+    setEmail("");
   }
 
   //atualiza lista//
@@ -71,7 +84,7 @@ function App() {
   return (
     <div className="app">
       <div className="creat">
-        <input id="Iname" type="text" placeholder="Name" 
+        <input id="Iname" type="text" placeholder="Nome" 
           onChange={(event) => {setName(event.target.value)}}/>
 
         <input id="Iemail" type="email" placeholder="Email"
