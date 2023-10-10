@@ -19,7 +19,7 @@
 
     ::-webkit-scrollbar {
         display: none;
-      }
+    }
 
     .creat{
         display: flex;
@@ -29,6 +29,7 @@
         max-width: 766px;
         min-width: 715px;
         height: 10%;
+        min-height: 65px;
         background-color: white;
         gap: 20px;
         border-radius: 20px;
@@ -49,6 +50,10 @@
             background-color: rgb(226, 224, 222);
             font-size: 16px;
         }
+
+        input:nth-child(1) {
+            //text-transform: capitalize;
+        }
     }
 
     .tabs {
@@ -61,7 +66,7 @@
         min-width: 715px;
         height: 60%;
         border-radius: 30px;
-        padding: 15px 0px 15px 0px;
+        padding: 5px 0px 15px 0px;
         overflow: scroll;
 
         .row {
