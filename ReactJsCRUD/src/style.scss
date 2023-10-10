@@ -27,6 +27,7 @@
         align-items: center;
         width: 80%;
         max-width: 766px;
+        min-width: 715px;
         height: 10%;
         background-color: white;
         gap: 20px;
@@ -57,6 +58,7 @@
         flex-direction: column;
         width: 80%;
         max-width: 766px;
+        min-width: 715px;
         height: 60%;
         border-radius: 30px;
         padding: 15px 0px 15px 0px;
@@ -78,6 +80,10 @@
                 gap: 30px;
                 width: 80%;
                 margin-left: 20px;
+
+                p {
+                    width: 50%;
+                }
             }
 
             .btns {
