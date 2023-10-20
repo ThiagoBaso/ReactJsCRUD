@@ -15,13 +15,13 @@ function App() {
 
   //add user//
   const creatUser = async () => {
-    if (document.getElementById("Iname").value && document.getElementById("Iemail").value){
+    if (document.getElementById("Iname").value && document.getElementById("Iemail").value && validacaoEmail()){
       await addDoc(usersCollectionRef, {name: name, email: email});
       cleamInput();
       getUsesr();
 
     }else{
-     alert("Preencha todos os campos!") 
+     alert("Preencha todos os campos de forma correta!") 
     }
   }
 
@@ -71,10 +71,32 @@ function App() {
     setEmail("");
   }
 
-  //atualiza lista//
+  //consulta db//
   const getUsesr = async() => {
     const data = await getDocs(usersCollectionRef);
     setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    console.log(data)
+  }
+
+  //valida email//
+  const validacaoEmail = () => {
+    const usuario = email.substring(0, email.indexOf("@"));
+    const dominio = email.substring(email.indexOf("@") + 1, email.length);
+
+    if ((usuario.length >= 1) &&
+      (dominio.length >= 3) &&
+      (usuario.search("@") == -1) &&
+      (dominio.search("@") == -1) &&
+      (usuario.search(" ") == -1) &&
+      (dominio.search(" ") == -1) &&
+      (dominio.search(".") != -1) &&
+      (dominio.indexOf(".") >= 1) &&
+      (dominio.lastIndexOf(".") < dominio.length - 1)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   useEffect(() => {
@@ -83,8 +105,12 @@ function App() {
 
   return (
     <div className="app">
+      <div className="header">
+        <h1>CRUD em ReactJS</h1>
+        <h1>by Thiago Baso</h1>
+      </div>
       <div className="creat">
-        <input id="Iname" type="text" placeholder="Nome" 
+        <input id="Iname" type="text" placeholder="Nome"
           onChange={(event) => {setName(event.target.value)}}/>
 
         <input id="Iemail" type="email" placeholder="Email"

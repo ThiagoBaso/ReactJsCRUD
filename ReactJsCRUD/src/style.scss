@@ -20,6 +20,33 @@
     ::-webkit-scrollbar {
         display: none;
     }
+    
+    .header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: aliceblue;
+        text-shadow: 1px 1px 1px #957dad,
+                     1px 2px 1px #957dad,
+                     1px 3px 1px #957dad,
+                     1px 4px 1px #957dad,
+                     1px 5px 1px #957dad,
+                     1px 6px 1px #957dad,
+                     1px 10px 5px rgba(16, 16, 16, 0.5),
+                     1px 15px 10px rgba(16, 16, 16, 0.4),
+                     1px 20px 30px rgba(16, 16, 16, 0.3),
+                     1px 25px 50px rgba(16, 16, 16, 0.2);
+    }
+
+    h1:last-child {
+        align-self: flex-end;
+        font-size: 35px;
+        margin-right: 10px;
+    }
 
     .creat{
         display: flex;
@@ -32,7 +59,14 @@
         min-height: 65px;
         background-color: white;
         gap: 20px;
-        border-radius: 20px;
+        border-radius: 15px;
+        box-shadow: 1px 1px 1px #957dad,
+                    1px 2px 1px #957dad,
+                    1px 3px 1px #957dad,
+                    1px 4px 1px #957dad,
+                    1px 10px 5px rgba(16, 16, 16, 0.5),
+                    1px 15px 10px rgba(16, 16, 16, 0.4),
+                    1px 25px 50px rgba(16, 16, 16, 0.2);
 
         button {
             border: none;
@@ -41,6 +75,7 @@
             cursor: pointer;
             font-size: 16px;
             height: 49px;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
         }
 
         input {
@@ -49,6 +84,7 @@
             padding: 15px;
             background-color: rgb(226, 224, 222);
             font-size: 16px;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
         }
 
     }
@@ -62,9 +98,19 @@
         max-width: 766px;
         min-width: 715px;
         height: 60%;
-        border-radius: 30px;
+        border-radius: 15px;
         padding: 5px 0px 15px 0px;
         overflow: scroll;
+        box-shadow: 1px 1px 1px #957dad,
+                    1px 2px 1px #957dad,
+                    1px 3px 1px #957dad,
+                    1px 4px 1px #957dad,
+                    1px 5px 1px #957dad,
+                    1px 6px 1px #957dad,
+                    1px 10px 5px rgba(16, 16, 16, 0.5),
+                    1px 15px 10px rgba(16, 16, 16, 0.4),
+                    1px 20px 30px rgba(16, 16, 16, 0.3),
+                    1px 25px 50px rgba(16, 16, 16, 0.2);
 
         .row {
             background-color: rgb(226, 224, 222);
@@ -75,6 +121,7 @@
             min-height: 50px;
             margin-top: 10px;
             border-radius: 10px;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 
             .infos {
                 display: flex;
@@ -102,6 +149,7 @@
                 padding: 10px;
                 cursor: pointer;
                 font-weight: 700;
+                box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
             }
         }
     }
